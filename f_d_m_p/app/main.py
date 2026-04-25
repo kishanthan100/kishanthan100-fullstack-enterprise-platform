@@ -25,6 +25,6 @@ app.add_middleware(
 
 
 Base.metadata.create_all(bind=engine)
-app.include_router(auth_router,prefix="/api")
-app.include_router(user_route.router,prefix="/api")
-app.include_router(items_route.router,prefix="/api")
+app.include_router(auth_router,prefix="/api",tags=["Auth"])
+app.include_router(user_route.router,prefix="/api",tags=["Users"])
+app.include_router(items_route.router,prefix="/api",tags=["Items"])

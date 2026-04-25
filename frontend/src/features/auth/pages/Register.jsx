@@ -46,8 +46,8 @@ function Register() {
 };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-mist-900">
-      <div className="w-full max-w-md p-8 bg-mist-800 rounded-2xl shadow-lg">
+    <div className="min-h-screen bg-mist-900 flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-mist-800 rounded-lg shadow-md p-8">
         <h2 className="mb-6 text-2xl font-bold text-center text-zinc-100">
           Register
         </h2>
@@ -64,8 +64,8 @@ function Register() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div >
             <label className="block mb-1 text-sm font-medium text-zinc-100">
               Name
             </label>
@@ -164,7 +164,7 @@ function Register() {
 
           <button
             type="submit"
-            className="w-full py-2 font-semibold text-white bg-emerald-800 rounded-lg hover:bg-emerald-700 transition"
+            className="col-span-1 md:col-span-2 w-full py-2 font-semibold text-white bg-emerald-800 rounded-lg hover:bg-emerald-700 transition"
           >
             Register
           </button>

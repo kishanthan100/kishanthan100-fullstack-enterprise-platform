@@ -22,8 +22,8 @@ class ItemService:
             {
                 "id": item.id,
                 "item_name": item.item_name,
-                "category": item.category,
-                "img_url": item.img_url
+                "category": item.category
+                
             }
             for item in items
         ]
@@ -35,8 +35,8 @@ class ItemService:
     def delete_item(self, item_id):
         self.repo.delete(item_id)
         self.cache.delete("items:all")
-    def create_item(self, item_name: str, category: str, img_url: str):
-        item = self.repo.create(item_name, category, img_url)
+    def create_item(self, item_name: str, category: str):
+        item = self.repo.create(item_name, category)
         self.cache.delete("items:all")
         return item
         

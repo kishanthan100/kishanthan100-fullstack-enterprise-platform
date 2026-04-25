@@ -19,7 +19,7 @@ const MainLayout = () => {
         <Navbar toggleSidebar={() => setIsOpen(prev => !prev)} />
 
         {/* Page Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-6 overflow-y-auto overflow-x-hidden">
           <Outlet />
         </main>
 

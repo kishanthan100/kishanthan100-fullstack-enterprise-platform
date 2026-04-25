@@ -108,7 +108,7 @@ const Login = () => {
           Don't have an account?{' '}
           <span
             onClick={() => navigate("/register")}
-            className="text-emerald-600 cursor-pointer hover:text-emerald-400 underline0 underline "
+            className="text-emerald-600  hover:text-emerald-400 underline0 underline"
           >
             Register here
           </span>

@@ -7,11 +7,11 @@ const UserLogsPage = () => {
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="p-6" >
+    <div className="flex-1 min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8" >
       <h2 className="text-2xl text-emerald-900 font-semibold mb-4">User Logs</h2>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-200 rounded-lg shadow-sm">
+      <div className="w-full overflow-x-auto">
+        <table className="w-full min-w-[900px] border border-gray-200 rounded-lg shadow-sm">
           <thead className="bg-emerald-700">
             <tr>
               <th className="px-4 py-2 text-left text-sm font-medium text-white">User ID</th>

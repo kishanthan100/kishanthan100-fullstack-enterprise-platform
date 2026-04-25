@@ -6,11 +6,11 @@ class ItemRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def create(self, item_name: str, category: str, img_url: str):
+    def create(self, item_name: str, category: str):
         item = Item(
             item_name=item_name,
-            category=category,
-            img_url=img_url
+            category=category
+            
         )
         self.db.add(item)
         self.db.commit()
