@@ -9,7 +9,7 @@ class ItemService:
         self.cache = CacheRepository()
 
     def get_all_items(self):
-        cache_key = "items:all"
+        cache_key = "items"
         cached_items = self.cache.get(cache_key)
         if cached_items:
             print("Returning from Redis")
@@ -29,14 +29,16 @@ class ItemService:
         ]
 
         self.cache.set(cache_key, result, expire=120)
-        print("Returning from PostgreSQL")
+        print("Returning from Redi after getting data from PostgreSQL")
         return result
     
     def delete_item(self, item_id):
         self.repo.delete(item_id)
-        self.cache.delete("items:all")
+        self.cache.delete("items")
+
     def create_item(self, item_name: str, category: str):
         item = self.repo.create(item_name, category)
-        self.cache.delete("items:all")
+        cache_key = "items"
+        self.cache.delete(cache_key)
         return item
         

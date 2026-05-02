@@ -10,3 +10,11 @@ export const oneUserAllLogs = async () => {
   const response = await api.get("/user-all-login-logs");
   return response.data;
 };
+
+
+export const userList = async () => {
+  const response = await api.get("/list-users");
+  return response.data;
+};
+
+

@@ -18,7 +18,7 @@ const Navbar = ({ toggleSidebar }) => {
         </button>
 
         <div className="text-emerald-900 font-semibold text-lg">
-          Welcome, {user?.email}
+          Welcome, {user?.email}, {user?.role}
         </div>
       </div>
 

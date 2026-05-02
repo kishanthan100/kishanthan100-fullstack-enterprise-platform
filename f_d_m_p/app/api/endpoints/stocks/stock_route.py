@@ -5,8 +5,6 @@ from app.db.postgres import get_db
 from app.core.security import get_current_user
 from app.schemas.stock_schema import BulkStockUpsert
 
-
-
 router = APIRouter()
     
 

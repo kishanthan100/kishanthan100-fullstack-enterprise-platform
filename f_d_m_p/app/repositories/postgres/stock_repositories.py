@@ -29,7 +29,7 @@ class StockRepository:
     def create(self, item_id: int, quantity: int):
         stock = Stock(item_id=item_id,
                       quantity=quantity,
-                      created_date = datetime.utc())
+                      updated_date=datetime.utcnow())
         self.db.add(stock)
         return stock
 

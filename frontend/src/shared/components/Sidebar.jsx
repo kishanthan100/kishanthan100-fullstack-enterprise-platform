@@ -48,7 +48,20 @@ const Sidebar = ({ isOpen }) => {
           {userOpen && (
             <div className="ml-4 space-y-1">
               <NavLink
-                to="/my-logs"
+                to="/user/user-list"
+                className={({ isActive }) =>
+                  `${baseStyle} text-sm ${
+                    isActive
+                      ? "bg-white text-emerald-900 font-semibold"
+                      : "hover:bg-emerald-600"
+                  }`
+                }
+              >
+                User List
+              </NavLink>
+
+              <NavLink
+                to="/user/my-logs"
                 className={({ isActive }) =>
                   `${baseStyle} text-sm ${
                     isActive
@@ -61,7 +74,7 @@ const Sidebar = ({ isOpen }) => {
               </NavLink>
 
               <NavLink
-                to="/user-logs"
+                to="/user/user-logs"
                 className={({ isActive }) =>
                   `${baseStyle} text-sm ${
                     isActive
@@ -71,6 +84,19 @@ const Sidebar = ({ isOpen }) => {
                 }
               >
                 All Users Logs
+              </NavLink>
+
+              <NavLink
+                to="/user/register"
+                className={({ isActive }) =>
+                  `${baseStyle} text-sm ${
+                    isActive
+                      ? "bg-white text-emerald-900 font-semibold"
+                      : "hover:bg-emerald-600"
+                  }`
+                }
+              >
+                Add User
               </NavLink>
               
 
@@ -90,7 +116,7 @@ const Sidebar = ({ isOpen }) => {
           {itemOpen && (
             <div className="ml-4 space-y-1">
               <NavLink
-                to="/list-items"
+                to="/item/list-items"
                 className={({ isActive }) =>
                   `${baseStyle} text-sm ${
                     isActive
@@ -103,7 +129,7 @@ const Sidebar = ({ isOpen }) => {
               </NavLink>
 
               <NavLink
-                to="/create-items"
+                to="/item/create-items"
                 className={({ isActive }) =>
                   `${baseStyle} text-sm ${
                     isActive

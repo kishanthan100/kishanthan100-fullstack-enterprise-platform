@@ -2,6 +2,7 @@ from app.db.postgres import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime,UniqueConstraint
 from datetime import datetime
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 
 class Item(Base):
     __tablename__ = "items"
@@ -32,6 +33,7 @@ class Stock(Base):
     id = Column(Integer, primary_key=True, index=True)
     quantity = Column(Integer, nullable=False)
     created_date = Column(DateTime, default=datetime.utcnow)
+    updated_date = Column(DateTime(timezone=True), onupdate=func.now())
     item_id = Column(Integer, ForeignKey("items.id", ondelete="CASCADE"), nullable=False)
     # Relationship back to Item
     item = relationship("Item", back_populates="stocks")

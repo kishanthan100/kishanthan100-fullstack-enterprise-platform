@@ -1,7 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException,status
 from app.services.mongodb.user_login_services import UserLogService
+from app.services.postgres.user_service import UserService
+from sqlalchemy.orm import Session
 from app.core.security import get_current_user
-
+from app.db.postgres import get_db
+from .utils import select_resignation
 
 router = APIRouter()
 
@@ -36,3 +39,25 @@ async def get_user_all_login_logs(doc: UserLogService = Depends(UserLogService),
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
+
+@router.get("/list-users")
+def list_users_from_postgres(
+    user: dict = Depends(get_current_user),
+    db: Session = Depends(get_db)):
+
+    user_name = user.get("role")
+    if user_name != "admin":
+        raise HTTPException(status_code=403, detail="Forbidden: Admin access required")
+    try:
+        service = UserService(db)
+        result = service.get_all_users()
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/get-roles")
+def list_roles():
+    result = select_resignation()
+    return result

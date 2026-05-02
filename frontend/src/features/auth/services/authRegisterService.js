@@ -12,3 +12,10 @@ export const registerUser = async (name, email, password) => {
 
   return response.data;
 };
+
+
+
+export const roleList = async () => {
+  const response = await api.get("/get-roles");
+  return response.data;
+};

@@ -73,6 +73,17 @@ const StockListPage = () => {
   };
 
   return (
+    <>
+    {updateLoading && (
+      <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div className="bg-white px-8 py-6 rounded-xl shadow-xl text-center">
+          <p className="text-lg font-semibold text-emerald-700">
+            Stock is updating...
+          </p>
+          <div className="mt-4 animate-spin rounded-full h-8 w-8 border-t-4 border-emerald-600 mx-auto"></div>
+        </div>
+      </div>
+    )}
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-6xl mx-auto">
       <h2 className="text-2xl text-emerald-900 font-semibold mb-4">
@@ -219,6 +230,7 @@ const StockListPage = () => {
       </div>
       <div className="overflow-x-auto bg-white rounded-xl shadow-md"></div>
     </div>
+    </>
   );
 };
 
