@@ -2,7 +2,7 @@ from logging.config import fileConfig
 from app.core.config import settings
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-from app.models.postgres import Item, User,Stock
+from app.models.postgres import Item, User,Stock, Customers
 from alembic import context
 
 # this is the Alembic Config object, which provides

@@ -1,3 +1,3 @@
 def select_resignation():
-    roles = ["HR","Developer","UI/UX Designer","Admin"]
+    roles = ["hr","developer","ui/ux-designer","admin"]
     return roles

@@ -10,6 +10,7 @@ class Item(Base):
     id = Column(Integer, primary_key=True, index=True)
     item_name = Column(String, index=True)
     category = Column(String, index=True)
+    country = Column(String, index=True)
     # Relationship to Stock
     stocks = relationship("Stock", back_populates="item", cascade="all, delete")
     
@@ -41,3 +42,14 @@ class Stock(Base):
     __table_args__ = (
         UniqueConstraint("item_id", name="uq_stock_item_id"),
     )
+
+
+class Customers(Base):
+    __tablename__ = "customers"
+
+    id = Column(Integer, primary_key=True, index=True)
+    customer_name = Column(String, index=True)
+    email = Column(String, unique=True, index=True)
+    contact_no = Column(String, unique=True, index=True)
+    address = Column(String, unique=False, index=True)
+    created_date = Column(DateTime, default=datetime.utcnow)

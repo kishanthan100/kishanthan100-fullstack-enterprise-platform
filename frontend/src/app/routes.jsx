@@ -12,6 +12,9 @@ import CreateItems from "../features/items/pages/CreateItems";
 import UpdateStock from  "../features/stock/pages/UpdateStock" 
 import ListStock from  "../features/stock/pages/ListStock"
 import Forbidden from "../shared/components/Forbidden";
+import CustomerListPage from "../features/customers/pages/ListCustomer";
+import CreateCustomerDetails from "../features/customers/pages/CreateCustomer";
+import UnAutherized from "../shared/components/UnAuthorized";
 
 export default function AppRoutes() {
   return (
@@ -37,6 +40,9 @@ export default function AppRoutes() {
         <Route path="/stock/update-stock" element={<UpdateStock />} />
         <Route path="/stock/stock-list" element={<ListStock />} />
         <Route path="/403" element={<Forbidden />} />
+        <Route path="/401" element={<UnAutherized />} />
+        <Route path="/customer/list-customers" element={<CustomerListPage />} />
+        <Route path="/customer/create-customers" element={<CreateCustomerDetails />} />
       </Route>
     </Routes>
   );

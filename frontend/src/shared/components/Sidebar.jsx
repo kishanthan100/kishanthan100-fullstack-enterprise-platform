@@ -5,6 +5,7 @@ const Sidebar = ({ isOpen }) => {
   const [itemOpen, setItemOpen] = useState(false);
   const [stockOpen, setStockOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
+  const [customerOpen, setCustomerOpen] = useState(false);
 
   const baseStyle =
     "block px-4 py-2 rounded-lg transition duration-200";
@@ -182,9 +183,50 @@ const Sidebar = ({ isOpen }) => {
               >
                 Update Stock
               </NavLink>
-              
+            </div>
+          )}
 
-              
+
+          {/* Customer Parent */}
+          <button
+            onClick={() => setCustomerOpen(!customerOpen)}
+            className={`${baseStyle} hover:bg-emerald-600 w-full text-left`}
+          >
+            Customers
+          </button>
+
+          {/* Sub Menu */}
+          {customerOpen && (
+            <div className="ml-4 space-y-1">
+              <NavLink
+                to="/customer/list-customers"
+                className={({ isActive }) =>
+                  `${baseStyle} text-sm ${
+                    isActive
+                      ? "bg-white text-emerald-900 font-semibold"
+                      : "hover:bg-emerald-600"
+                  }`
+                }
+              >
+                Customer List
+              </NavLink> 
+            </div>
+          )}
+          {/* Sub Menu */}
+          {customerOpen && (
+            <div className="ml-4 space-y-1">
+              <NavLink
+                to="/customer/create-customers"
+                className={({ isActive }) =>
+                  `${baseStyle} text-sm ${
+                    isActive
+                      ? "bg-white text-emerald-900 font-semibold"
+                      : "hover:bg-emerald-600"
+                  }`
+                }
+              >
+                Create Customer
+              </NavLink> 
             </div>
           )}
 

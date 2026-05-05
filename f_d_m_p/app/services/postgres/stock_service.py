@@ -1,4 +1,3 @@
-from sqlalchemy.exc import IntegrityError
 from app.repositories.postgres.stock_repositories import StockRepository
 from app.repositories.redis.stock_cache_repository import StocksCacheRepository
 from app.schemas.stock_schema import BulkStockUpsert
@@ -13,16 +12,7 @@ class StockService:
         self.cache = StocksCacheRepository()
 
     def show_create_stocks(self):
-        # result = self.repo.get_items_with_stock()
-        # return [
-        #     {
-        #         "item_id": row.item_id,
-        #         "item_name":row.item_name,
-        #         "quantity": row.quantity,
-        #         "created_date": row.created_date,
-        #     }
-        #     for row in result
-        # ]
+       
         cache_key = "stocks"
         cached_stocks = self.cache.get(cache_key)
         if cached_stocks:
