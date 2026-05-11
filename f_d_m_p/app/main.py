@@ -9,6 +9,7 @@ from app.api.endpoints.dashboard import dashboard_route
 from app.db.postgres import engine, Base, SessionLocal
 from app.db.seeds import seed_db
 from contextlib import asynccontextmanager
+from app.core.config import settings
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -28,7 +29,7 @@ app= FastAPI(
 )
 
 origins = [
-    "http://localhost:5173"
+    settings.ALLOWED_ORIGINS
 ]
 
 app.add_middleware(

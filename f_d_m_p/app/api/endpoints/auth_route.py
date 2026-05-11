@@ -6,6 +6,7 @@ from app.services.postgres.user_service import UserService
 from sqlalchemy.orm import Session
 from app.db.postgres import get_db
 from app.core.security import create_access_token,get_current_user
+from app.core.config import settings
 
 router = APIRouter()
 
@@ -33,7 +34,7 @@ async def login(request: Request,
         key="access_token", 
         value=access_token, 
         httponly=True,   
-        secure=False,     
+        secure=settings.SECURE,     
         samesite="lax",
         max_age=86400
     
