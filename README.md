@@ -1,181 +1,133 @@
-# FastAPI + React Full-Stack Application
+# Inventory Management System
 
-## Production-ready full-stack web application using:
+A full-stack web application for managing small business inventory with role-based access control.
 
-1. FastAPI (Backend API)
-2. PostgreSQL (Relational Database)
-3. MongoDB (Document Database)
-4. Redis (Caching & Session Store)
-5. Alembic (Migrations)
-6. JWT Authentication (HttpOnly cookies)
-7. React (Vite) (Frontend SPA)
-8. Nginx (Reverse Proxy + Static Hosting)
+## Overview
 
+This is a **modern, scalable inventory management platform** designed for small businesses to efficiently manage:
 
-## Authentication Flow
-1. User submits credentials
-2. Backend validates against PostgreSQL
-3. Backend generates:
-   ```access_token``` (JWT, HttpOnly cookie)
-4. Token automatically included in subsequent  requests
-5. Protected routes validate JWT via dependency injection
+- **Users** - Create and manage team members with role-based access
+- **Items** - Catalog and track products in inventory
+- **Stocks** - Monitor stock levels, quantities, and warehouse locations
+- **Customers** - Manage customer information and purchase history
 
-#### Authentication is stateless and secure via HttpOnly cookies.
+### Key Features
 
+- **Role-Based Access Control (RBAC)** - Different permissions for Admin, Manager, Staff roles
+- **JWT Authentication** - Secure token-based authentication with HttpOnly cookies
+- **Real-time Updates** - Live inventory tracking
+- **Multi-Database** - PostgreSQL for relational data, MongoDB for flexible data storage
+- **Caching** - Redis for performance optimization
+- **RESTful API** - FastAPI with automatic documentation
 
+## Tech Stack
 
-## 🗄️ Database Architecture
+### Frontend
+- **React** - UI library
+- **Vite** - Build tool (fast development)
+- **Nginx** - Web server & reverse proxy
 
-### PostgreSQL (Primary Relational Database)
-- User accounts and authentication
-- Structured relational data
-- Transactional operations
-- Alembic migration management
+### Backend
+- **FastAPI** - Modern Python web framework
+- **Gunicorn + Uvicorn** - Production-ready workers
+- **SQLAlchemy** - ORM for PostgreSQL
+- **PyMongo** - MongoDB driver
 
-### MongoDB (Document Store)
-- Unstructured/semi-structured data
-- High-volume write operations
-- Flexible schema documents
-- Analytics and logging data
+### Databases
+- **PostgreSQL** (Supabase) - User data, items, stocks, customers
+- **MongoDB** (Atlas) - Audit logs, activity tracking
+- **Redis** - Session caching, performance
 
-### Redis (In-Memory Data Store)
-- JWT token blacklisting/revocation
-- Session caching
-- Rate limiting
-- Frequently accessed data caching
-- Background task queues
+### DevOps
+- **Docker** - Containerization
+- **GitHub Actions** - CI/CD pipeline
+- **Docker Hub** - Image registry
 
+## Features
 
+### User Management
+- Create/update users with different roles (Admin, Manager, Staff)
+- JWT-based authentication
+- Secure password hashing
+- Session management with HttpOnly cookies
 
-## Backend Setup (FastAPI)
-1️. Install Dependencies
+### Inventory Management
+- Add, edit, delete items
+- Track stock levels across locations
+- Stock history and movements
+- Low stock alerts
 
-Using UV:
-```
-cd backend
-uv sync
-```
+### Customer Management
+- Customer profiles and contact info
+- Purchase history
+- Order tracking
 
-Or pip:
-```
-pip install -r requirements.txt
-```
+### Access Control
+- Admin - Full system access
+- Manager - Inventory and customer management
+- Staff - View-only or limited inventory access
+- Fine-grained permissions per resource
 
-2. Database Configuration
+### Audit & Logging
+- Track user actions (who, what, when)
+- Inventory movement history
+- Stored in MongoDB for long-term analysis
 
-Update .env or configuration file:
-```
-DATABASE_URL=postgresql://user:password@localhost:5432/dbname
-SECRET_KEY=your_secret_key
-ALGORITHM=HS256
-```
+## Getting Started
 
-## Run Migrations
-```
-alembic upgrade head
-```
-## Start Backend
-```
-uvicorn main:app --reload
-```
+See [README.md](./README.md) for full setup instructions.
 
-### Backend runs on:
-```
-http://127.0.0.1:8000
-```
+**Quick Start:**
+```bash
+# Frontend
+cd frontend && npm install && npm run dev
 
-
-## Frontend Setup (React + Vite)
-1. Install Dependencies
-```
-cd frontend/reac-app
-npm install
-```
-2. Run Development Server
-```
-npm run dev
-```
-Runs at:
-```
-http://localhost:5173
-```
-3. Production Build
-```
-npm run build
+# Backend
+cd f_d_m_p && uv sync && uv run uvicorn app.main:app --reload
 ```
 
-Build output:
+## Project Status
+
+- ✅ Frontend & Backend CI/CD pipelines
+- ✅ Multi-platform Docker builds
+- ✅ Development environment setup
+- 🔄 In development
+- 📦 Ready for deployment
+
+## Architecture
 ```
-dist/
+┌──────────────────────────────────────┐
+│        React Frontend (Nginx)        │
+│  - User Dashboard                    │
+│  - Inventory Views                   │
+│  - Role-Based UI                     │
+└──────────────────┬───────────────────┘
+│ HTTPS/HTTP
+┌──────────────────▼───────────────────┐
+│      FastAPI Backend (Gunicorn)      │
+│  - User Management & Auth            │
+│  - Inventory APIs                    │
+│  - Customer APIs                     │
+│  - RBAC Middleware                   │
+└──────────────────┬───────────────────┘
+│         │         │
+┌────▼──┐  ┌───▼───┐  ┌─▼─────┐
+│ Postgres│ │MongoDB│  │ Redis │
+│(Users)  │ │(Logs) │  │(Cache)│
+└─────────┘ └───────┘  └───────┘
 ```
 
 
-## Production Deployment
-### Architecture
-```
-Client → Nginx → FastAPI → PostgreSQL
-```
-* React built via npm run build
-* Static files served by Nginx
-* API proxied via /api/ to FastAPI
-* JWT stored in HttpOnly cookie
-* Single origin (no CORS required in production)
+## Deployment
 
-🧩 Nginx Configuration Overview
-```
-server {
-    listen 80;
+- **Docker Compose** for local testing
+- **GitHub Actions** for automated builds and pushes
+- **Docker Hub** for image registry
+- Ready to deploy on any VPS with Docker
 
-    root /usr/share/nginx/html;
-    index index.html;
+## Contributing
 
-    location /api/ {
-        proxy_pass http://backend:8000;
-        proxy_set_header Host $host;
-    }
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}
-```
-## Security Considerations
-* JWT stored in HttpOnly cookie
-* Use HTTPS in production
-* Set:
-```
-secure=True
-samesite="lax"
-```
-* Never store JWT in localStorage in production
-* Use strong SECRET_KEY
-* Enable rate limiting (optional)
-
-## Tech Stack Summary
-```
-Layer	     Technology
--------------------
-Frontend ---->	React + Vite
-Backend ----> FastAPI
-Database ----> PostgreSQL
-ORM ----> SQLAlchemy
-Migration ----> Alembic
-Auth ----> JWT (HttpOnly)
-Server ----> Nginx
-Packaging ----> UV
-```
-
-## Future Improvements
-1. Role-based access control
-2. Refresh token rotation
-3. Redis for token blacklisting
-4. Docker Compose production setup
-5. CI/CD pipeline
-6. HTTPS via Let's Encrypt
-
-
-## 🧑‍💻 Author
-```
-T.Kishanthan
-Full-Stack Developer
-```
+1. Create feature branch
+2. Push changes
+3. GitHub Actions automatically builds and pushes images
+4. Manual deployment to server
