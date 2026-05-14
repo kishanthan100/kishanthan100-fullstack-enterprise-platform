@@ -1,7 +1,7 @@
 # ─────────────────────────────────────────
 # Stage 1 — Install dependencies with uv
 # ─────────────────────────────────────────
-FROM python:3.11-slim AS builder
+FROM python:3.13-slim AS builder
 
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
@@ -19,7 +19,7 @@ RUN ls -la /app/.venv/bin/ | grep gunicorn || echo "GUNICORN NOT FOUND!"
 # ─────────────────────────────────────────
 # Stage 2 — Production image
 # ─────────────────────────────────────────
-FROM python:3.11-slim
+FROM python:3.13-slim
 
 WORKDIR /app
 
