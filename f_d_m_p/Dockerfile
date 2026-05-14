@@ -13,6 +13,7 @@ COPY pyproject.toml uv.lock* ./
 
 # Install dependencies into /app/.venv
 RUN uv sync --frozen --no-dev
+RUN ls -la /app/.venv/bin/ | grep gunicorn || echo "GUNICORN NOT FOUND!"
 
 
 # ─────────────────────────────────────────
