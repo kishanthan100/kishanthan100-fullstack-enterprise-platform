@@ -79,6 +79,7 @@ pnpm-debug.log*
 
 # Docker overrides
 docker-compose.override.yml
+docker-compose.yml
 
 # Local docker volumes (if any)
 *.db
